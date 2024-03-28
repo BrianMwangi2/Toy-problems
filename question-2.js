@@ -2,19 +2,19 @@
 function speedLimit() {
     let speed = prompt(`enter speed` );
    //adding demerit into the function so as it can be expressed
-    let demerits=0;
+    let demerits;
     if (speed <=70) {
         return `OK`;
     }
    //using demerit 
-    else if (speed>=70){
+    else if (speed>=70 && speed<=130){
         demerits= Math.abs((speed - 70)/5)
         return `points ${demerits}` ;
     }
     // using demerit as a function so as to bring desired result 
-    else if(demerits>12){
+    else 
         return `license suspended`
-    }
+    
 }
 speedLimit()
 
