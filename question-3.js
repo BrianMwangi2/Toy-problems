@@ -154,12 +154,10 @@ calculateNetSalary();
 function grossSalary() {
     let salary = prompt("Enter salary here");
     if (isNaN(salary)) {
-        alert("Please enter a valid number for the salary.");
         return;
     }
     let benefits = prompt('Enter allowances here');
     if (isNaN(benefits)) {
-        alert("Please enter a valid number for the benefits.");
         return;
     }
 
@@ -169,7 +167,7 @@ function grossSalary() {
 }
 
 grossSalary();
-
+// calculating payee 
 function calculatePAYE(taxableIncome) {
     const taxValue = [
         { amount: 24000, rate: 0.1 },
@@ -182,6 +180,8 @@ function calculatePAYE(taxableIncome) {
 
     let paye = 0;
     let remainingIncome = taxableIncome;
+// using conditions & the array method 
+// c represents  current value in taxValue array while v is value from taxable income
 
     for (let c = 0; c < taxValue.length; c++) {
         const { amount, rate } = taxValue[c];
@@ -198,26 +198,32 @@ function calculatePAYE(taxableIncome) {
     return paye;
 }
 
-// You can call calculatePAYE() directly with a valid taxableIncome
+calculatePAYE() // calling out calculate paye function 
 
 // Function to calculate NHIF deductions
 function calculateNHIF(basicSalary) {
+   // Nhif rates  
     const nhifRates = [150, 300, 400, 500, 600, 750, 850, 900, 1000, 1100, 1200, 1300, 1350, 1400, 1500, 1600, 1700, 1800, 1900, 2000];
+    // formula & calculation 
     const index = Math.min(Math.floor(basicSalary / 1000), nhifRates.length - 1);
     return nhifRates[index];
 }
-
-// You can call calculateNHIF() directly with a valid basicSalary
+calculateNHIF() // calling out  the calculate nhif function 
 
 // Function to calculate NSSF deduction
 function calculateNSSF(basicSalary) {
     const nssfRate = 0.06;
     return Math.min(20000, basicSalary * nssfRate);
 }
-
-// You can call calculateNSSF() directly with a valid basicSalary
+calculateNSSF()// calling out  the calculate nssf function 
 
 // Function to calculate net salary
+// taxable income = bs + benefits/ allowances
+// payee= Taxable income 
+// Deductions = Nhif,Nssf,Tax
+// total deductions = Nssf+Payee+Nhif
+// Net  Salary = Bs-total deductions
+
 function calculateNetSalary(basicSalary, benefits) {
     const taxableIncome = basicSalary + benefits;
     const paye = calculatePAYE(taxableIncome);
@@ -229,5 +235,4 @@ function calculateNetSalary(basicSalary, benefits) {
 
     return { grossSalary, paye, nhifDeduction, nssfDeduction, deductions, netSalary };
 }
-
-// You need to call calculateNetSalary() with valid basicSalary and benefits
+calculateNetSalary() // calling out calculation of net salary !!
